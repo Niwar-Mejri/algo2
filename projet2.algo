@@ -1,0 +1,50 @@
+ALGORITHM DistinctSum
+VAR
+    set1, set2 : ARRAY[1..100] OF INTEGER
+    n1, n2, i, j, sum : INTEGER
+    isCommon : BOOLEAN
+BEGIN
+    sum = 0
+
+    WRITE "Enter the size of set1:"
+    READ n1
+    FOR i = 1 TO n1 DO
+        WRITE "Enter element ", i, " of set1:"
+        READ set1[i]
+    END FOR
+
+    WRITE "Enter the size of set2:"
+    READ n2
+    FOR i = 1 TO n2 DO
+        WRITE "Enter element ", i, " of set2:"
+        READ set2[i]
+    END FOR
+
+    // Add unique elements from set1
+    FOR i = 1 TO n1 DO
+        isCommon = FALSE
+        FOR j = 1 TO n2 DO
+            IF set1[i] = set2[j] THEN
+                isCommon = TRUE
+            ENDIF
+        END FOR
+        IF isCommon = FALSE THEN
+            sum = sum + set1[i]
+        ENDIF
+    END FOR
+
+    // Add unique elements from set2
+    FOR i = 1 TO n2 DO
+        isCommon = FALSE
+        FOR j = 1 TO n1 DO
+            IF set2[i] = set1[j] THEN
+                isCommon = TRUE
+            ENDIF
+        END FOR
+        IF isCommon = FALSE THEN
+            sum = sum + set2[i]
+        ENDIF
+    END FOR
+
+    WRITE "Sum of distinct elements = ", sum
+END
